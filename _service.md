@@ -41,6 +41,10 @@ The service can uninstall itself with `service $NAME uninstall`. Yes, that's ver
 
 Don't want it? Remove lines 56-58 of the service's script.
 
+## Logs?
+
+Your service will log its output to `/var/log/$NAME.log`. Don't forget to setup a logrotate :)
+
 ## I'm noob and/or lazy
 
 Yep, I'm lazy too. But still, I've written a script to automate this :)

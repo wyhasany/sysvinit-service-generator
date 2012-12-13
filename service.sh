@@ -11,8 +11,8 @@
 SCRIPT=<COMMAND>
 RUNAS=<USER>
 
-PIDNAME=<NAME>
-
+PIDFILE=/var/run/<NAME>
+LOGFILE=/var/log/<NAME>
 
 start() {
   if [ -f /var/run/$PIDNAME ] && kill -0 $(cat /var/run/$PIDNAME); then
@@ -20,18 +20,18 @@ start() {
     return 1
   fi
   echo 'Starting service…' >&2
-  local CMD="$SCRIPT &> /dev/stderr & echo \$!"
-  su -c "$CMD" $RUNAS > /var/run/$PIDNAME
+  local CMD="$SCRIPT &> \"$LOGFILE\" & echo \$!"
+  su -c "$CMD" $RUNAS > "$PIDFILE"
   echo 'Service started' >&2
 }
 
 stop() {
-  if [ ! -f /var/run/$PIDNAME ] || ! kill -0 $(cat /var/run/$PIDNAME); then
+  if [ ! -f "$PIDFILE" ] || ! kill -0 $(cat "$PIDFILE"); then
     echo 'Service not running' >&2
     return 1
   fi
   echo 'Stopping service…' >&2
-  kill -15 $(cat /var/run/$PIDNAME) && rm -f /var/run/$PIDNAME
+  kill -15 $(cat "$PIDFILE") && rm -f "$PIDFILE"
   echo 'Service stopped' >&2
 }
 
