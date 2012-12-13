@@ -28,9 +28,19 @@ prompt_token() {
 }
 
 prompt_token 'NAME'        'Service name'
+if [ -f "/etc/inid.d/$NAME" ]; then
+  echo "Error: service '$NAME' already exists"
+  exit 1
+fi
+
 prompt_token 'DESCRIPTION' ' Description'
 prompt_token 'COMMAND'     '     Command'
 prompt_token 'USER'        '        User'
+if ! id -u "$USER"; then
+  echo "Error: user '$USER' not found"
+  exit 1
+fi
+
 echo ""
 
 echo "--- Installation ---"
