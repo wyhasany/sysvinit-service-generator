@@ -11,7 +11,7 @@
 SCRIPT=<COMMAND>
 RUNAS=<USER>
 
-PIDNAME=$(basename "$0")
+PIDNAME=<NAME>
 
 
 start() {
@@ -35,12 +35,21 @@ stop() {
   echo 'Service stopped' >&2
 }
 
+uninstall() {
+  update-rc.d -f <NAME> remove
+  rm -f "$0"
+}
+
 case "$1" in
  start)
      start
      ;;
  stop)
      stop
+     ;;
+ uninstall)
+     stop
+     uninstall
      ;;
  retart)
      stop

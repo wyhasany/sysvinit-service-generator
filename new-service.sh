@@ -52,4 +52,9 @@ else
 fi
 
 echo ""
+echo "---Uninstall instructions ---"
+echo "The service can uninstall itself:"
+echo "    service \"$NAME\" uninstall"
+echo "It will simply run update-rc.d -f \"$NAME\" remove && rm -f \"/etc/init.d/$NAME\""
+echo ""
 echo "--- Terminated ---"
