@@ -35,6 +35,12 @@ update-rc.d $YOUR_SERVICE_NAME defaults
 
 Enjoy
 
+## Uninstall
+
+The service can uninstall itself with `service $NAME uninstall`. Yes, that's very easy, therefore a bit dangerous. But as it's an auto-generated script, you can bring it back very easily. I use it for tests and often install/uninstall, that's why I've put that here.
+
+Don't want it? Remove lines 56-58 of the service's script.
+
 ## I'm noob and/or lazy
 
 Yep, I'm lazy too. But still, I've written a script to automate this :)

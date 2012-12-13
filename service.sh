@@ -17,7 +17,7 @@ PIDNAME=<NAME>
 start() {
   if [ -f /var/run/$PIDNAME ] && kill -0 $(cat /var/run/$PIDNAME); then
     echo 'Service already running' >&2
-    exit 1
+    return 1
   fi
   echo 'Starting service…' >&2
   local CMD="$SCRIPT &> /dev/stderr & echo \$!"
@@ -28,7 +28,7 @@ start() {
 stop() {
   if [ ! -f /var/run/$PIDNAME ] || ! kill -0 $(cat /var/run/$PIDNAME); then
     echo 'Service not running' >&2
-    exit 1
+    return 1
   fi
   echo 'Stopping service…' >&2
   kill -15 $(cat /var/run/$PIDNAME) && rm -f /var/run/$PIDNAME
@@ -36,25 +36,30 @@ stop() {
 }
 
 uninstall() {
-  update-rc.d -f <NAME> remove
-  rm -f "$0"
+  echo -n "Are you really sure you want to uninstall this service? That cannot be undone. [yes|No] "
+  local SURE
+  read SURE
+  if [ "$SURE" = "yes" ]; then
+    stop
+    update-rc.d -f <NAME> remove
+    rm -fv "$0"
+  fi
 }
 
 case "$1" in
- start)
-     start
-     ;;
- stop)
-     stop
-     ;;
- uninstall)
-     stop
-     uninstall
-     ;;
- retart)
-     stop
-     start
-     ;;
- *)
-     echo "Usage: $0 {start|stop|restart}"
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  uninstall)
+    uninstall
+    ;;
+  retart)
+    stop
+    start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|uninstall}"
 esac
