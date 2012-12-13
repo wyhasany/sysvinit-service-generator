@@ -40,7 +40,7 @@ Enjoy
 Yep, I'm lazy too. But still, I've written a script to automate this :)
 
 ```sh
-curl 'https://raw.github.com/gist/4275302/new-service.sh' | bash
+wget 'https://raw.github.com/gist/4275302/new-service.sh' && bash new-service.sh
 ```
 
 In this script I will download `service.sh` into a `tempfile`, replace some tokens, and then show you commands you should run as superuser.
@@ -48,5 +48,7 @@ In this script I will download `service.sh` into a `tempfile`, replace some toke
 If you feel confident enough with my script, you can `sudo` the script directly:
 
 ```sh
-curl 'https://raw.github.com/gist/4275302/new-service.sh' | sudo bash
+wget 'https://raw.github.com/gist/4275302/new-service.sh' && sudo bash new-service.sh
 ```
+
+Note: the cool hipsterish `curl $URL | bash` won't work here, I don't really want to check why.
