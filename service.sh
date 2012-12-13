@@ -11,8 +11,8 @@
 SCRIPT=<COMMAND>
 RUNAS=<USER>
 
-PIDFILE=/var/run/<NAME>
-LOGFILE=/var/log/<NAME>
+PIDFILE=/var/run/<NAME>.pid
+LOGFILE=/var/log/<NAME>.log
 
 start() {
   if [ -f /var/run/$PIDNAME ] && kill -0 $(cat /var/run/$PIDNAME); then
