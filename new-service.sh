@@ -36,7 +36,7 @@ fi
 prompt_token 'DESCRIPTION' ' Description'
 prompt_token 'COMMAND'     '     Command'
 prompt_token 'RUNAS'       '        User'
-if ! id -u "RUNAS"; then
+if ! id -u "$RUNAS" &> /dev/null; then
   echo "Error: user '$RUNAS' not found"
   exit 1
 fi
