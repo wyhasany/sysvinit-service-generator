@@ -9,7 +9,7 @@
 ### END INIT INFO
 
 SCRIPT=<COMMAND>
-RUNAS=<USER>
+RUNAS=<USERNAME>
 
 PIDFILE=/var/run/<NAME>.pid
 LOGFILE=/var/log/<NAME>.log

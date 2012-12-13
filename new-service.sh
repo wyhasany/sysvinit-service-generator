@@ -35,9 +35,9 @@ fi
 
 prompt_token 'DESCRIPTION' ' Description'
 prompt_token 'COMMAND'     '     Command'
-prompt_token 'RUNAS'       '        User'
-if ! id -u "$RUNAS" &> /dev/null; then
-  echo "Error: user '$RUNAS' not found"
+prompt_token 'USERNAME'    '        User'
+if ! id -u "$USERNAME" &> /dev/null; then
+  echo "Error: user '$USERNAME' not found"
   exit 1
 fi
 
@@ -50,14 +50,14 @@ if [ ! -w /etc/init.d ]; then
   echo "You should now type those commands as superuser to install and run your service:"
   echo ""
   echo "   mv \"$SERVICE_FILE\" \"/etc/init.d/$NAME\""
-  echo "   touch \"/var/log/$NAME.log\" && chown \"$RUNAS\" \"/var/log/$NAME.log\""
+  echo "   touch \"/var/log/$NAME.log\" && chown \"$USERNAME\" \"/var/log/$NAME.log\""
   echo "   update-rc.d \"$NAME\" defaults"
   echo "   service \"$NAME\" start"
 else
   echo "1. mv \"$SERVICE_FILE\" \"/etc/init.d/$NAME\""
   mv -v "$SERVICE_FILE" "/etc/init.d/$NAME"
-  echo "2. touch \"/var/log/$NAME.log\" && chown \"$RUNAS\" \"/var/log/$NAME.log\""
-  touch "/var/log/$NAME.log" && chown "$RUNAS" "/var/log/$NAME.log"
+  echo "2. touch \"/var/log/$NAME.log\" && chown \"$USERNAME\" \"/var/log/$NAME.log\""
+  touch "/var/log/$NAME.log" && chown "$USERNAME" "/var/log/$NAME.log"
   echo "3. update-rc.d \"$NAME\" defaults"
   update-rc.d "$NAME" defaults
   echo "4. service \"$NAME\" start"
