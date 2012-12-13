@@ -28,7 +28,7 @@ prompt_token() {
 }
 
 prompt_token 'NAME'        'Service name'
-if [ -f "/etc/inid.d/$NAME" ]; then
+if [ -f "/etc/init.d/$NAME" ]; then
   echo "Error: service '$NAME' already exists"
   exit 1
 fi
