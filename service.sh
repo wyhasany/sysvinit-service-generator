@@ -8,8 +8,8 @@
 # Description:       <DESCRIPTION>
 ### END INIT INFO
 
-SCRIPT='<COMMAND>'
-RUNAS='<USER>'
+SCRIPT=<COMMAND>
+RUNAS=<USER>
 
 PIDNAME=$(basename "$0")
 

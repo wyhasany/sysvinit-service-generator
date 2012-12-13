@@ -37,6 +37,16 @@ Enjoy
 
 ## I'm noob and/or lazy
 
-Yep, I'm lazy too. 
+Yep, I'm lazy too. But still, I've written a script to automate this :)
 
-I may edit the gist and provide an automated way to install new services.
+```sh
+curl 'https://raw.github.com/gist/4275302/new-service.sh' | bash
+```
+
+In this script I will download `service.sh` into a `tempfile`, replace some tokens, and then show you commands you should run as superuser.
+
+If you feel confident enough with my script, you can `sudo` the script directly:
+
+```sh
+curl 'https://raw.github.com/gist/4275302/new-service.sh' | sudo bash
+```
