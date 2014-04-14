@@ -2,6 +2,8 @@
 
 Look at [LSB init scripts](http://wiki.debian.org/LSBInitScripts) for more information.
 
+Original script taken from from [naholyr's](https://github.com/naholyr) [gist](https://gist.github.com/naholyr/4275302)
+
 ## Usage
 
 Copy to `/etc/init.d`:
