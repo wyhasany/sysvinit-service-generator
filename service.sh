@@ -63,5 +63,5 @@ case "$1" in
     start
     ;;
   *)
-    echo "Usage: $0 {start|stop|resttart|uninstall}"
+    echo "Usage: $0 {start|stop|restart|uninstall}"
 esac
