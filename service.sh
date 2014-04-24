@@ -15,7 +15,7 @@ PIDFILE=/var/run/<NAME>.pid
 LOGFILE=/var/log/<NAME>.log
 
 start() {
-  if [ -f /var/run/$PIDNAME ] && kill -0 $(cat /var/run/$PIDNAME); then
+  if [ -f $PIDFILE ] && kill -0 $(cat $PIDFILE); then
     echo 'Service already running' >&2
     return 1
   fi
