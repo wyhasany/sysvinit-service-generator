@@ -71,6 +71,9 @@ case "$1" in
   stop)
     stop
     ;;
+  status)
+    status
+    ;;
   uninstall)
     uninstall
     ;;
