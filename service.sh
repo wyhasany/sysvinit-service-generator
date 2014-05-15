@@ -10,9 +10,10 @@
 
 SCRIPT=<COMMAND>
 RUNAS=<USERNAME>
+NAME=<SERVICE_NAME>
 
-PIDFILE=/var/run/<NAME>.pid
-LOGFILE=/var/log/<NAME>.log
+PIDFILE=/var/run/$NAME.pid
+LOGFILE=/var/log/$NAME.log
 
 start() {
   if [ -f $PIDFILE ] && kill -0 $(cat $PIDFILE); then
@@ -48,6 +49,21 @@ uninstall() {
   fi
 }
 
+status() {
+        printf "%-50s" "Checking $NAME..."
+if [ -f $PIDFILE ]; then
+PID=`cat $PIDFILE`
+if [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+printf "%s\n" "Process dead but pidfile exists"
+else
+echo "Running, the PID is $PID"
+fi
+else
+printf "%s\n" "Service not running"
+fi
+}
+
+
 case "$1" in
   start)
     start
@@ -63,5 +79,5 @@ case "$1" in
     start
     ;;
   *)
-    echo "Usage: $0 {start|stop|restart|uninstall}"
+    echo "Usage: $0 {start|stop|status|restart|uninstall}"
 esac
