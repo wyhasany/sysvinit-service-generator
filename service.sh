@@ -51,16 +51,16 @@ uninstall() {
 
 status() {
         printf "%-50s" "Checking $NAME..."
-if [ -f $PIDFILE ]; then
-PID=`cat $PIDFILE`
-if [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
-printf "%s\n" "Process dead but pidfile exists"
-else
-echo "Running, the PID is $PID"
-fi
-else
-printf "%s\n" "Service not running"
-fi
+    if [ -f $PIDFILE ]; then
+        PID=$(cat $PIDFILE)
+            if [ -z "$(ps axf | grep ${PID} | grep -v grep)" ]; then
+                printf "%s\n" "The process appears to be dead but pidfile still exists"
+            else    
+                echo "Running, the PID is $PID"
+            fi
+    else
+        printf "%s\n" "Service not running"
+    fi
 }
 
 
