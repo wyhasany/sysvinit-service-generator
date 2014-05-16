@@ -34,11 +34,12 @@ Install service to be run at boot-time:
 ```sh
 update-rc.d $YOUR_SERVICE_NAME defaults
 ```
-For other Linux using rpm as centos or redhat, you can use
+For rpm based distributions such as CentOS or Red Hat, you can use
+
 ```sh
 chkconfig $YOUR_SERVICE_NAME --add
 ```
-if you want to see which level you start the script
+If you want to see which runlevel your script will run in
 
 ```sh
 chkconfig $YOUR_SERVICE_NAME --list
