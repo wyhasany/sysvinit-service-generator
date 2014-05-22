@@ -25,10 +25,12 @@ prompt_token() {
   done
   VAL=$(printf '%q' "$VAL")
   eval $1=$VAL
-  sed -i "s/<$1>/$(printf '%q' "$VAL")/g" $SERVICE_FILE
+  local rstr=$(printf '%q' "$VAL")
+  rstr=$(echo $rstr | sed -e 's/[\/&]/\\&/g') # escape search string for sed http://stackoverflow.com/questions/407523/escape-a-string-for-a-sed-replace-pattern
+  sed -i "s/<$1>/$rstr/g" $SERVICE_FILE
 }
 
-prompt_token 'NAME'        'Service name'
+prompt_token 'SERVICE_NAME'        'Service name'
 if [ -f "/etc/init.d/$NAME" ]; then
   echo "Error: service '$NAME' already exists"
   exit 1
