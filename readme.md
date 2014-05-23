@@ -1,3 +1,6 @@
+Note: You can acheive the same thing that this project tries to acheive by using the MetaInit package in debian:
+(https://wiki.debian.org/MetaInit)
+
 # Sample service script for debianoids
 
 Look at [LSB init scripts](http://wiki.debian.org/LSBInitScripts) for more information.
