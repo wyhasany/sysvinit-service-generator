@@ -23,7 +23,17 @@ start() {
   echo 'Starting service…' >&2
   local CMD="$SCRIPT &> \"$LOGFILE\" & echo \$!"
   su -c "$CMD" $RUNAS > "$PIDFILE"
-  echo 'Service started' >&2
+ # Try with this command line instead of above if not workable
+ # su -s su -s /bin/bash $RUNAS -c "$CMD" > "$PIDFILE"
+ 
+  sleep 2
+  PID=$(cat $PIDFILE)
+    if pgrep -u $RUNAS -f $NAME > /dev/null
+    then
+      echo "$NAME is now running, the PID is $PID"
+    else
+      echo "Error! Could not start $NAME!"
+    fi
 }
 
 stop() {
