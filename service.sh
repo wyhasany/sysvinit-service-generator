@@ -32,6 +32,7 @@ start() {
     then
       echo "$NAME is now running, the PID is $PID"
     else
+      echo ''
       echo "Error! Could not start $NAME!"
     fi
 }
