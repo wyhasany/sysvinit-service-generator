@@ -2,7 +2,7 @@
 
 SERVICE_FILE=$(tempfile)
 
-echo "--- Download template ---"
+echo "--- Copy template ---"
 cp service.sh "$SERVICE_FILE"
 chmod +x "$SERVICE_FILE"
 echo ""
