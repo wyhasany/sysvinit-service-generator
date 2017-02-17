@@ -10,10 +10,9 @@
 
 SCRIPT=<COMMAND>
 RUNAS=<USERNAME>
-NAME=<SERVICE_NAME>
 
-PIDFILE=/var/run/$NAME.pid
-LOGFILE=/var/log/$NAME.log
+PIDFILE=/var/run/<NAME>.pid
+LOGFILE=/var/log/<NAME>.log
 
 start() {
   if [ -f $PIDFILE ] && kill -0 $(cat $PIDFILE); then
@@ -43,14 +42,14 @@ uninstall() {
   if [ "$SURE" = "yes" ]; then
     stop
     rm -f "$PIDFILE"
-    echo "Notice: log file was not removed: '$LOGFILE'" >&2
+    echo "Notice: log file was not removed: $LOGFILE" >&2
     update-rc.d -f <NAME> remove
     rm -fv "$0"
   fi
 }
 
 status() {
-        printf "%-50s" "Checking $NAME..."
+    printf "%-50s" "Checking <NAME>..."
     if [ -f $PIDFILE ]; then
         PID=$(cat $PIDFILE)
             if [ -z "$(ps axf | grep ${PID} | grep -v grep)" ]; then

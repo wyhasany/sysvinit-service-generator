@@ -29,7 +29,7 @@ prompt_token() {
   sed -i "s/<$1>/$rstr/g" $SERVICE_FILE
 }
 
-prompt_token 'SERVICE_NAME'        'Service name'
+prompt_token 'NAME'        'Service name'
 if [ -f "/etc/init.d/$NAME" ]; then
   echo "Error: service '$NAME' already exists"
   exit 1
