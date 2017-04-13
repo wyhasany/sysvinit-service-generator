@@ -8,7 +8,7 @@
 # Description:       <DESCRIPTION>
 ### END INIT INFO
 
-SCRIPT=<COMMAND>
+SCRIPT="<COMMAND>"
 RUNAS=<USERNAME>
 
 PIDFILE=/var/run/<NAME>.pid
