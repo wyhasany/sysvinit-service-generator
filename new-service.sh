@@ -39,9 +39,9 @@ if [ -f "/etc/init.d/$NAME" ]; then
   exit 1
 fi
 
-prompt_token 'DESCRIPTION' ' Description' $1
-prompt_token 'COMMAND'     '     Command' $2
-prompt_token 'USERNAME'    '        User' $3
+prompt_token 'DESCRIPTION' ' Description' $2
+prompt_token 'COMMAND'     '     Command' $3
+prompt_token 'USERNAME'    '        User' $4
 if ! id -u "$USERNAME" &> /dev/null; then
   echo "Error: user '$USERNAME' not found"
   exit 1

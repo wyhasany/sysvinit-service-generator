@@ -78,6 +78,19 @@ wget 'https://raw.githubusercontent.com/dc55028/sample-service-script/master/new
 
 Note: the cool hipsterish `curl $URL | bash` won't work here, I don't really want to check why.
 
+The script works offline so you can clone this repository then you can upload this script on your server and run it 
+directly:
+
+```sh
+sudo bash new-service.sh
+```
+
+The script also handle parameters as showed below:
+
+```sh
+sudo bash new-service.sh "service_name" "description" "command to execute" "user which should run command"
+```
+
 ### Demo
 
 Creating the service:
