@@ -82,12 +82,12 @@ Note: the cool hipsterish `curl $URL | bash` won't work here, I don't really wan
 
 Creating the service:
 
-![service-create](https://github.com/dc55028/sample-service-script/raw/master/screenshots/service-create.png)
+![service-create](screenshots/service-create.png)
 
 Looking at service files (logs, pid):
 
-![service-files](https://github.com/dc55028/sample-service-script/raw/master/screenshots/service-files.png)
+![service-files](screenshots/service-files.png)
 
 Uninstalling service:
 
-![service-uninstall](https://github.com/dc55028/sample-service-script/raw/master/screenshots/service-uninstall.png)
+![service-uninstall](screenshots/service-uninstall.png)
