@@ -43,7 +43,7 @@ uninstall() {
     stop
     rm -f "$PIDFILE"
     echo "Notice: log file was not removed: $LOGFILE" >&2
-    update-rc.d -f <NAME> remove
+    update-rc.d -f $NAME remove
     rm -fv "$0"
   fi
 }
