@@ -1,1 +1,0 @@
-sudo update-rc.d -f "unison" remove && sudo rm -f "/etc/init.d/unison" && sudo ./new-service.sh unison "unison ssh://root@[123.45.67.89]//root/test ~/test -repeat 1 -batch -terse -force newer" vagrant
