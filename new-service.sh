@@ -47,7 +47,7 @@ echo ""
 
 echo "--- Installation ---"
 if [ ! -w /etc/init.d ]; then
-  echo "You don't gave me enough permissions to install service myself."
+  echo "You didn't give me enough permissions to install service myself."
   echo "That's smart, always be really cautious with third-party shell scripts!"
   echo "You should now type those commands as superuser to install and run your service:"
   echo ""
