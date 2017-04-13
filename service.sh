@@ -15,7 +15,7 @@ PIDFILE=/var/run/<NAME>.pid
 LOGFILE=/var/log/<NAME>.log
 
 start() {
-  if [ -f $PIDFILE ] && kill -0 $(cat $PIDFILE); then
+  if [ -f $PIDFILE ] && [ -s $PIDFILE ] && kill -0 $(cat $PIDFILE); then
     echo 'Service already running' >&2
     return 1
   fi
@@ -61,7 +61,7 @@ uninstall() {
 
 status() {
     printf "%-50s" "Checking <NAME>..."
-    if [ -f $PIDFILE ]; then
+    if [ -f $PIDFILE ] && [ -s $PIDFILE ]; then
         PID=$(cat $PIDFILE)
             if [ -z "$(ps axf | grep ${PID} | grep -v grep)" ]; then
                 printf "%s\n" "The process appears to be dead but pidfile still exists"
