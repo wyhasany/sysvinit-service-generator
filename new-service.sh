@@ -2,9 +2,8 @@
 
 SERVICE_FILE=$(tempfile)
 
-echo "--- Download template ---"
-wget -q -O "$SERVICE_FILE" 'https://raw.githubusercontent.com/jasonblewis/sample-service-script/master/service.sh' || { echo 'ERROR: Could not retreive service.sh from github'; exit 1;}
-
+echo "--- Copy template ---"
+cp service.sh "$SERVICE_FILE"
 chmod +x "$SERVICE_FILE"
 echo ""
 
@@ -16,29 +15,33 @@ echo ""
 
 prompt_token() {
   local VAL=""
-  while [ "$VAL" = "" ]; do
-    echo -n "${2:-$1} : "
-    read VAL
-    if [ "$VAL" = "" ]; then
-      echo "Please provide a value"
-    fi
-  done
-  VAL=$(printf '%q' "$VAL")
+  if [ "$3" = "" ]; then
+    while [ "$VAL" = "" ]; do
+      echo -n "${2:-$1} : "
+      read VAL
+      if [ "$VAL" = "" ]; then
+        echo "Please provide a value"
+      fi
+    done
+  else
+    VAL=${@:3:($#-2)}
+  fi
+  VAL=$(printf '%s' "$VAL")
   eval $1=$VAL
   local rstr=$(printf '%q' "$VAL")
   rstr=$(echo $rstr | sed -e 's/[\/&]/\\&/g') # escape search string for sed http://stackoverflow.com/questions/407523/escape-a-string-for-a-sed-replace-pattern
   sed -i "s/<$1>/$rstr/g" $SERVICE_FILE
 }
 
-prompt_token 'SERVICE_NAME'        'Service name'
+prompt_token 'NAME'        'Service name' $1
 if [ -f "/etc/init.d/$NAME" ]; then
   echo "Error: service '$NAME' already exists"
   exit 1
 fi
 
-prompt_token 'DESCRIPTION' ' Description'
-prompt_token 'COMMAND'     '     Command'
-prompt_token 'USERNAME'    '        User'
+prompt_token 'DESCRIPTION' ' Description' $2
+prompt_token 'COMMAND'     '     Command' $3
+prompt_token 'USERNAME'    '        User' $4
 if ! id -u "$USERNAME" &> /dev/null; then
   echo "Error: user '$USERNAME' not found"
   exit 1
@@ -48,7 +51,7 @@ echo ""
 
 echo "--- Installation ---"
 if [ ! -w /etc/init.d ]; then
-  echo "You don't gave me enough permissions to install service myself."
+  echo "You didn't give me enough permissions to install service myself."
   echo "That's smart, always be really cautious with third-party shell scripts!"
   echo "You should now type those commands as superuser to install and run your service:"
   echo ""

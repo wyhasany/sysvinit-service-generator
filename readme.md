@@ -65,7 +65,7 @@ Your service will log its output to `/var/log/$NAME.log`. Don't forget to setup 
 Yep, I'm lazy too. But still, I've written a script to automate this :)
 
 ```sh
-wget 'https://raw.github.com/gist/4275302/new-service.sh' && bash new-service.sh
+wget 'https://raw.githubusercontent.com/jasonblewis/sample-service-script/master/new-service.sh' && bash new-service.sh
 ```
 
 In this script I will download `service.sh` into a `tempfile`, replace some tokens, and then show you commands you should run as superuser.
@@ -73,21 +73,34 @@ In this script I will download `service.sh` into a `tempfile`, replace some toke
 If you feel confident enough with my script, you can `sudo` the script directly:
 
 ```sh
-wget 'https://raw.github.com/gist/4275302/new-service.sh' && sudo bash new-service.sh
+wget 'https://raw.githubusercontent.com/jasonblewis/sample-service-script/master/new-service.sh' && sudo bash new-service.sh
 ```
 
 Note: the cool hipsterish `curl $URL | bash` won't work here, I don't really want to check why.
+
+The script works offline so you can clone this repository then you can upload this script on your server and run it 
+directly:
+
+```sh
+sudo bash new-service.sh
+```
+
+The script also handle parameters as showed below:
+
+```sh
+sudo bash new-service.sh "service_name" "description" "command to execute" "user which should run command"
+```
 
 ### Demo
 
 Creating the service:
 
-![service-create](http://dl.dropbox.com/u/6414656/gist-4275302/service-create.png)
+![service-create](screenshots/service-create.png)
 
 Looking at service files (logs, pid):
 
-![service-files](http://dl.dropbox.com/u/6414656/gist-4275302/service-files.png)
+![service-files](screenshots/service-files.png)
 
 Uninstalling service:
 
-![service-uninstall](http://dl.dropbox.com/u/6414656/gist-4275302/service-uninstall.png)
+![service-uninstall](screenshots/service-uninstall.png)
