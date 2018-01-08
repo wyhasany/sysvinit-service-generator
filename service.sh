@@ -56,6 +56,8 @@ uninstall() {
     echo "Notice: log file was not removed: $LOGFILE" >&2
     update-rc.d -f $NAME remove
     rm -fv "$0"
+  else
+    echo "Abort!"
   fi
 }
 

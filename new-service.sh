@@ -2,6 +2,23 @@
 
 SERVICE_FILE=$(tempfile)
 
+if [ ! -e service.sh ]; then
+  echo "--- Download template ---"
+  echo "I'll now download the service.sh, because is is not downloaded."
+  echo "..."
+  wget -q https://raw.githubusercontent.com/wyhasany/sample-service-script/master/service.sh
+  if [ "$?" != 0 ]; then
+    echo "I could not download the template!"
+    echo "You should now download the service.sh file manualy. Run therefore:"
+    echo "wget https://raw.githubusercontent.com/wyhasany/sample-service-script/master/service.sh"
+    exit 1
+  else
+    echo "I donloaded the tmplate sucessfully"
+    echo ""
+  fi
+fi
+
+
 echo "--- Copy template ---"
 cp service.sh "$SERVICE_FILE"
 chmod +x "$SERVICE_FILE"
