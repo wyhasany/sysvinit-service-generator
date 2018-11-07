@@ -3,6 +3,8 @@ Note: You can acheive the same thing that this project tries to acheive by using
 
 # Sample service script for debianoids
 
+This script enables fast daemonization apps as a Linux services with SysVinit init system.
+
 Look at [LSB init scripts](http://wiki.debian.org/LSBInitScripts) for more information.
 
 Original script taken from from [naholyr's](https://github.com/naholyr) [gist](https://gist.github.com/naholyr/4275302)
