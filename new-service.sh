@@ -13,7 +13,7 @@ if [ ! -e service.sh ]; then
     echo "wget https://raw.githubusercontent.com/wyhasany/sample-service-script/master/service.sh"
     exit 1
   else
-    echo "I donloaded the tmplate sucessfully"
+    echo "I downloaded the template successfully"
     echo ""
   fi
 fi
