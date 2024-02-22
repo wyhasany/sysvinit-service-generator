@@ -1,19 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-SERVICE_FILE=$(tempfile)
+SERVICE_FILE=$(mktemp)
 
 if [ ! -e service.sh ]; then
   echo "--- Download template ---"
   echo "I'll now download the service.sh, because is is not downloaded."
   echo "..."
-  wget -q https://raw.githubusercontent.com/wyhasany/sample-service-script/master/service.sh
-  if [ "$?" != 0 ]; then
+  if ! wget -q https://raw.githubusercontent.com/wyhasany/sample-service-script/master/service.sh; then
     echo "I could not download the template!"
     echo "You should now download the service.sh file manualy. Run therefore:"
     echo "wget https://raw.githubusercontent.com/wyhasany/sample-service-script/master/service.sh"
     exit 1
   else
-    echo "I donloaded the tmplate sucessfully"
+    echo "I downloaded the template successfully"
     echo ""
   fi
 fi
@@ -35,30 +34,31 @@ prompt_token() {
   if [ "$3" = "" ]; then
     while [ "$VAL" = "" ]; do
       echo -n "${2:-$1} : "
-      read VAL
+      read -r VAL
       if [ "$VAL" = "" ]; then
         echo "Please provide a value"
       fi
     done
   else
-    VAL=${@:3:($#-2)}
+    VAL=${*:3:($#-2)}
   fi
   VAL=$(printf '%s' "$VAL")
-  eval $1=$VAL
-  local rstr=$(printf '%q' "$VAL")
-  rstr=$(echo $rstr | sed -e 's/[\/&]/\\&/g') # escape search string for sed http://stackoverflow.com/questions/407523/escape-a-string-for-a-sed-replace-pattern
-  sed -i "s/<$1>/$rstr/g" $SERVICE_FILE
+  eval "$1=\"$VAL\""
+  local rstr
+  rstr="$(printf '%q' "$VAL")"
+  rstr=$(echo "$rstr" | sed -e 's/[\/&]/\\&/g') # escape search string for sed http://stackoverflow.com/questions/407523/escape-a-string-for-a-sed-replace-pattern
+  sed -i "s/<$1>/$rstr/g" "$SERVICE_FILE"
 }
 
-prompt_token 'NAME'        'Service name' $1
+prompt_token 'NAME'        'Service name' "$1"
 if [ -f "/etc/init.d/$NAME" ]; then
   echo "Error: service '$NAME' already exists"
   exit 1
 fi
 
-prompt_token 'DESCRIPTION' ' Description' $2
-prompt_token 'COMMAND'     '     Command' $3
-prompt_token 'USERNAME'    '        User' $4
+prompt_token 'DESCRIPTION' ' Description' "$2"
+prompt_token 'COMMAND'     '     Command' "$3"
+prompt_token 'USERNAME'    '        User' "$4"
 if ! id -u "$USERNAME" &> /dev/null; then
   echo "Error: user '$USERNAME' not found"
   exit 1
